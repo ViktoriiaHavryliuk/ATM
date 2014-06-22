@@ -1,12 +1,10 @@
 package myatm;
 
-public class NotEnoughMoneyInATM extends Exception {
-	public NotEnoughMoneyInATM (String messadge){
-		super (messadge);
-	}
+public class NotEnoughMoneyInATM extends RuntimeException {
 	
-	public String toString(){
-        return "NotEnoughMoneyinATM";
-    }
+	public NotEnoughMoneyInATM() { super(); }
+
+
+	public NotEnoughMoneyInATM(String s) { super(s); }
 
 }

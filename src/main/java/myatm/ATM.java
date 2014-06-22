@@ -3,9 +3,10 @@ package myatm;
 
 public class ATM {
 	private double moneyInATM;
-	
-	//Account myAccount = (Account) myAcc;
-	
+	private Card card;
+	private boolean validCard = false;
+	private int pinCode;
+
 	//ћожно задавать количество денег в банкомате 
 	ATM(double moneyInATM){
 		this.moneyInATM = moneyInATM;
@@ -20,24 +21,23 @@ public class ATM {
 	//ћетод принимает карту и пин-код, провер€ет пин-код карты и не заблокирована ли она
 	//≈сли неправильный пин-код или карточка заблокирована, возвращаем false. ѕри этом, вызов всех последующих методов у ATM с данной картой должен генерировать исключение NoCardInserted
 	public boolean validateCard(Card card, int pinCode){	
-		Card mycard = (Card)card;
-		if (mycard.checkPin(pinCode) == false || mycard.isBlocked() == true ){
-			return false;
+		this.card = card;
+		if (card.checkPin(pinCode) == false || card.isBlocked() == true ){
+			return validCard;
 		} else 
-		return true;
+			return validCard = true;
 	}
 
 	//¬озвращает сколько денег есть на счету
-	public double checkBalance(Card card, int pinCode) throws NoCardInsertedExeption {
-		Card mycard = (Card)card;
-		if (validateCard(mycard, pinCode) == false){		
-				throw new NoCardInsertedExeption();		
+	public double checkBalance()  {
+		if (validateCard(card, pinCode) == false){		
+			throw new NoCardInsertedExeption();		
 		} 
-			return mycard.getAccount().getBalance();
-		} 
-		
-		
-	
+		return card.getAccount().getBalance();
+	} 
+
+
+
 
 	//ћетод дл€ сн€ти€ указанной суммы
 	//ћетод возвращает сумму, котора€ у клиента осталась на счету после сн€ти€
@@ -45,12 +45,9 @@ public class ATM {
 	//≈сли недостаточно денег на счете, то должно генерироватьс€ исключение NotEnoughMoneyInAccount 
 	//≈сли недостаточно денег в банкомате, то должно генерироватьс€ исключение NotEnoughMoneyInATM 
 	//ѕри успешном сн€тии денег, указанна€ сумма должна списыватьс€ со счета, и в банкомате должно уменьшатьс€ количество денег
-	public double getCash(Card card, int pinCode, double amount) throws NoCardInsertedExeption, NotEnoughMoneyInATM, NotEnoughMoneyInAccount{
-		
-		Card mycard = (Card)card;
-		
+	public double getCash(double amount) {
 
-		if (validateCard(mycard, pinCode) == false){
+		if (validateCard(card, pinCode) == false){
 			throw new NoCardInsertedExeption ("NoCardInserted");
 		}
 
@@ -58,14 +55,14 @@ public class ATM {
 			throw new NotEnoughMoneyInATM ("NotEnoughMoneyInATM");
 		}
 
-		if (mycard.getAccount().getBalance() < amount){
+		if (card.getAccount().getBalance() < amount){
 			throw new NotEnoughMoneyInAccount ("NotEnoughMoneyInAccount");
 		}
-		
-		mycard.getAccount().withdrow(amount);
+
+		card.getAccount().withdrow(amount);
 		moneyInATM -= amount;
-		
-		return mycard.getAccount().getBalance();
+
+		return card.getAccount().getBalance();
 
 	}
 }

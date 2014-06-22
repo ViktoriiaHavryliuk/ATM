@@ -1,12 +1,11 @@
 package myatm;
 
-public class NotEnoughMoneyInAccount extends Exception {
-	public NotEnoughMoneyInAccount (String messadge){
-		super (messadge);
-	}
-	public String toString(){
-        return "NotEnoughMoneyInAccount";
-    }
+public class NotEnoughMoneyInAccount extends RuntimeException {
+	
+	public NotEnoughMoneyInAccount() { super(); }
+
+
+	public NotEnoughMoneyInAccount(String s) { super(s); }
 	
 
 }

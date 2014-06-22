@@ -1,6 +1,6 @@
 package myatm;
 
-public class NoCardInsertedExeption extends Exception {
+public class NoCardInsertedExeption extends RuntimeException {
 
 	public NoCardInsertedExeption() { super(); }
 

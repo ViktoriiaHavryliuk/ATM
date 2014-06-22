@@ -8,7 +8,7 @@ public class MyATM {
         Card card = null;
         int pinCode = 1234;
         atm.validateCard(card, pinCode);
-        atm.checkBalance(card, pinCode);
-        atm.getCash(card, pinCode, 999.99);        
+        atm.checkBalance();
+        atm.getCash(999.99);        
     }
 }
