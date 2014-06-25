@@ -36,14 +36,14 @@ public class ATMTest {
 		return new Random().nextInt();
 	}
 
-	// ���������, ��� ��� ����� ������ checkPin
+	// проверяем, что был вызов метода checkPin
 	@Test
 	public void testThatValidateCardChekedPin() {
 		myCard.checkPin(anyInt());
 		verify(myCard).checkPin(anyInt());
 	}
 
-	//��������, ��� �������� �������� 1 �����
+	//проверка, что карточка валидная 1 ветка
 	@Test
 	public void testThatCardValidWhenValidData1() {
 		when(myCard.checkPin(anyInt())).thenReturn(true);
@@ -52,7 +52,7 @@ public class ATMTest {
 
 	}
 
-	//��������, ��� �������� �������� 2 �����
+	//проверка, что карточка валидная 2 ветка
 	@Test
 	public void testThatCardValidWhenValidData2() {
 		when(myCard.checkPin(anyInt())).thenReturn(false);
@@ -61,7 +61,7 @@ public class ATMTest {
 
 	}
 
-	//��������, ��� �������� �������� 3 �����
+	//проверка, что карточка валидная 3 ветка
 	@Test
 	public void testThatCardValidWhenValidData3() {
 		when(myCard.checkPin(anyInt())).thenReturn(false);
@@ -70,7 +70,7 @@ public class ATMTest {
 
 	}
 
-	//��������, ��� �������� �������� 4 �����
+	//проверка, что карточка валидная 4 ветка
 	@Test
 	public void testThatCardValidWhenValidData4() {
 		when(myCard.checkPin(anyInt())).thenReturn(true);
@@ -79,14 +79,14 @@ public class ATMTest {
 
 	}
 
-	// ��������� ���������� "���������� ��������" in CheckBalance Method
+	//  проверяем исключение "невалидная карточка" in chechBalance Method
 	@Test(expected=NoCardInsertedExeption.class)
 	public void testExpectNoCardInsertedExeptionInCheckBalance() {			
 		when(atm.validateCard(myCard, anyInt())).thenReturn(false);
 		atm.checkBalance();
 	}
 
-	// ��������� ������ CheckBalance Method � �������� ���������
+	// проверяем работу CheckBalance Method с валидной карточкой
 	@Test
 	public void testCheckBalanceWithValidCardThatReturnBalanceOnAccount(){			
 		when(atm.validateCard(myCard, anyInt())).thenReturn(true);
@@ -95,14 +95,14 @@ public class ATMTest {
 		assertThat(atm.checkBalance(), is(MoneyinAccount));
 	}
 
-	// ��������� ���������� "������������ ������� � ���������" ��� �������� ��������
+	//  проверяем исключение "недостаточно средств в банкомате" при валидной карточке
 	@Test(expected=NotEnoughMoneyInATM.class)
 	public void testExpectNotEnoughMoneyInATMExeptionInGetCash() {
 		when(atm.validateCard(myCard, anyInt())).thenReturn(true);
 		atm.getCash(inValidamount);
 	}
 
-	// ��������� ���������� "���������� ��������" in GetCash Method
+	// проверяем исключение "невалидная карточка" in GetCash Method
 
 	@Test(expected=NoCardInsertedExeption.class)
 	public void testThatExpectNoCardInsertedExeptionInGetCash(){
@@ -110,7 +110,7 @@ public class ATMTest {
 		atm.getCash(inValidamount);						
 	}
 
-	// ��������� ���������� "������������ ������� �� ��������"
+	// проверяем исключение "недостаточно средств на карточке"
 	@Test(expected=NotEnoughMoneyInAccount.class)
 	public void testExpectNotEnoughMoneyInAccountExeptionInGetCash() {
 		when(atm.validateCard(myCard, anyInt())).thenReturn(true);
@@ -119,7 +119,8 @@ public class ATMTest {
 		atm.getCash(amount);
 	}
 
-	// ������ ������ getCash ��� �������� ��������, ����������� ���������� ����� �� ����� � � ���������, � ��������� ���������� ������ ����� �� ������ �����
+	// работа метода getCash при валидной карточке, достаточном количестве денег на счету и в банкомате,
+	//в банкомате становится меньше денег на снятую сумму
 	@Test
 	public void testGetCashWithAllValidParametrsVerifyThatMoneyInAccountBecomeLessThenSpecifiedAmount() {
 		double NewAmount = 40;  
@@ -131,7 +132,8 @@ public class ATMTest {
 		assertThat(atm.getMoneyInATM(), is(NewmoneyinATM));
 	}
 
-	// ������ ������ getCash ��� �������� ��������, ����������� ���������� ����� �� ����� � � ���������, ������� ����������� �������� ����� �� ����������, ����� ��������� ������
+	//  работа метода getCash при валидной карточке, достаточном количестве денег на счету и в банкомате,
+	//сначала выполняется проверка карты на валидность, потом снимаются деньги
 	@Test
 	public void testGetCashCallsMethodInCorrectOrder() {
 		double NewAmount = 40;  
