@@ -25,7 +25,7 @@ public class ATMTest {
 		assertThat(atm.getMoneyInATM(), is(moneyinATM));
 	}
 
-	//надо проигнорить входной параметр?
+	//РёРіРЅРѕСЂРёРј РІС…РѕРґРЅРѕР№ РїР°СЂР°РјРµС‚СЂ?
 	@Test
 	public void ignoreParameterInChackPinMethod(){
 		myCard.checkPin(someRandomInt());  // when  
@@ -36,14 +36,14 @@ public class ATMTest {
 		return new Random().nextInt();
 	}
 
-	// проверяем, что был вызов метода checkPin
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ checkPin
 	@Test
 	public void testThatValidateCardChekedPin() {
 		myCard.checkPin(anyInt());
 		verify(myCard).checkPin(anyInt());
 	}
 
-	//проверка, что карточка валидная 1 ветка
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1 пїЅпїЅпїЅпїЅпїЅ
 	@Test
 	public void testThatCardValidWhenValidData1() {
 		when(myCard.checkPin(anyInt())).thenReturn(true);
@@ -52,7 +52,7 @@ public class ATMTest {
 
 	}
 
-	//проверка, что карточка валидная 2 ветка
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2 пїЅпїЅпїЅпїЅпїЅ
 	@Test
 	public void testThatCardValidWhenValidData2() {
 		when(myCard.checkPin(anyInt())).thenReturn(false);
@@ -61,7 +61,7 @@ public class ATMTest {
 
 	}
 
-	//проверка, что карточка валидная 3 ветка
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 3 пїЅпїЅпїЅпїЅпїЅ
 	@Test
 	public void testThatCardValidWhenValidData3() {
 		when(myCard.checkPin(anyInt())).thenReturn(false);
@@ -70,7 +70,7 @@ public class ATMTest {
 
 	}
 
-	//проверка, что карточка валидная 4 ветка
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 4 пїЅпїЅпїЅпїЅпїЅ
 	@Test
 	public void testThatCardValidWhenValidData4() {
 		when(myCard.checkPin(anyInt())).thenReturn(true);
@@ -79,14 +79,14 @@ public class ATMTest {
 
 	}
 
-	// проверяем исключение "невалидная карточка" in CheckBalance Method
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" in CheckBalance Method
 	@Test(expected=NoCardInsertedExeption.class)
 	public void testExpectNoCardInsertedExeptionInCheckBalance() {			
 		when(atm.validateCard(myCard, anyInt())).thenReturn(false);
 		atm.checkBalance();
 	}
 
-	// проверяем работу CheckBalance Method с валидной карточкой
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ CheckBalance Method пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	@Test
 	public void testCheckBalanceWithValidCardThatReturnBalanceOnAccount(){			
 		when(atm.validateCard(myCard, anyInt())).thenReturn(true);
@@ -95,14 +95,14 @@ public class ATMTest {
 		assertThat(atm.checkBalance(), is(MoneyinAccount));
 	}
 
-	// проверяем исключение "недостаточно средств в банкомате" при валидной карточке
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	@Test(expected=NotEnoughMoneyInATM.class)
 	public void testExpectNotEnoughMoneyInATMExeptionInGetCash() {
 		when(atm.validateCard(myCard, anyInt())).thenReturn(true);
 		atm.getCash(inValidamount);
 	}
 
-	// проверяем исключение "невалидная карточка" in GetCash Method
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" in GetCash Method
 
 	@Test(expected=NoCardInsertedExeption.class)
 	public void testThatExpectNoCardInsertedExeptionInGetCash(){
@@ -110,7 +110,7 @@ public class ATMTest {
 		atm.getCash(inValidamount);						
 	}
 
-	// проверяем исключение "недостаточно средств на карточке"
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
 	@Test(expected=NotEnoughMoneyInAccount.class)
 	public void testExpectNotEnoughMoneyInAccountExeptionInGetCash() {
 		when(atm.validateCard(myCard, anyInt())).thenReturn(true);
@@ -119,7 +119,7 @@ public class ATMTest {
 		atm.getCash(amount);
 	}
 
-	// работа метода getCash при валидной карточке, достаточном количестве денег на счету и в банкомате, в банкомате становится меньше денег на снятую сумму
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ getCash пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	@Test
 	public void testGetCashWithAllValidParametrsVerifyThatMoneyInAccountBecomeLessThenSpecifiedAmount() {
 		double NewAmount = 40;  
@@ -131,7 +131,7 @@ public class ATMTest {
 		assertThat(atm.getMoneyInATM(), is(NewmoneyinATM));
 	}
 
-	// работа метода getCash при валидной карточке, достаточном количестве денег на счету и в банкомате, сначала выполняется проверка карты на валидность, потом снимаются деньги
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ getCash пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	@Test
 	public void testGetCashCallsMethodInCorrectOrder() {
 		double NewAmount = 40;  
