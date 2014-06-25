@@ -14,11 +14,11 @@ import org.mockito.InOrder;
 public class ATMTest {
 	double moneyinATM = 1000;						// given
 	double amount = 900;							// given
-	double inValidamount = 1500;					// given
+	double inValidamount = 1500;						// given
 	double MoneyinAccount =42;						// given
-	private Card myCard = mock(Card.class);			// given
-	private Account myAccount = mock(Account.class);// given
-	ATM atm = new ATM(moneyinATM);					// given
+	private Card myCard = mock(Card.class);					// given
+	private Account myAccount = mock(Account.class);			// given
+	ATM atm = new ATM(moneyinATM);						// given
 
 	@Test
 	public void testGetMoneyInATM() {
@@ -28,8 +28,8 @@ public class ATMTest {
 	//игнорим входной параметр?
 	@Test
 	public void ignoreParameterInChackPinMethod(){
-		myCard.checkPin(someRandomInt());  // when  
-		verify(myCard).checkPin(anyInt()); // then
+		myCard.checkPin(someRandomInt());  				// when  
+		verify(myCard).checkPin(anyInt()); 				// then
 	}
 
 	private int someRandomInt() {
@@ -106,7 +106,7 @@ public class ATMTest {
 
 	@Test(expected=NoCardInsertedExeption.class)
 	public void testThatExpectNoCardInsertedExeptionInGetCash(){
-		when(atm.validateCard(myCard, anyInt())).thenReturn(false);	// when
+		when(atm.validateCard(myCard, anyInt())).thenReturn(false);		// when
 		atm.getCash(inValidamount);						
 	}
 
